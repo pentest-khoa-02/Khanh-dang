@@ -114,9 +114,11 @@ output :
 ```js
 lấy tất cả cái ảnh mà thuộc web 
 
-SELECT url, title from (image join classify on image.image_id = classify.image_id) join category_photo on classify.Category_photo_id = category_photo.Category_photo_id WHERE category_photo.Category_photo_id = 2;
+SELECT url, title from (image join classify on image.image_id = classify.image_id)
+join category_photo on classify.Category_photo_id = category_photo.Category_photo_id
+ WHERE category_photo.Category_photo_id = 2;
 
-//inner join 
+
 ```
 output :
 
