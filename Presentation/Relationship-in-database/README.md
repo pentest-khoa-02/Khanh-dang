@@ -122,6 +122,4 @@ output :
 
 ![alt text](image-10.png)
 
-##  Loại liên cha con 
 
-Loại này liên quan đến thừa kế 
