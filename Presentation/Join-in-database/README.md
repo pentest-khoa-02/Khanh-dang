@@ -13,6 +13,7 @@
 
 
 Cách thức hoạt động sẽ như sau  : 
+
 Inner join , sẽ so sánh từng record với 1 list record bên table kia . nếu match thì nó sẽ giữ lại , ko thì sẽ loại bỏ  
 VD :  
 ![alt text](image-2.png)
@@ -20,6 +21,7 @@ VD :
 Như trên ta có hai bảng là *user* và *Information* , liên kết khóa ngoại với nhau qua trường *user_id*
 Bây giờ nó sẽ hoạt động như sau  : 
 Đầu tiên nó sẽ gộp thành 1 table =>  như ở đây sẽ thành 1 bảng có *8+4=12* column 
+
 Lấy từng record bên *user* so sáng 1 list record bên *information* nếu mà hai cái user_id giống nhau thì nó sẽ giữ lại làm kết quả,
 
 Ban đầu ta có bảng *user*  
