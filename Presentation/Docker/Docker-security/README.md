@@ -31,23 +31,23 @@ Container Engine có thể thao tác trực tiếp với kernel của host ( V�
 
 1. Vì 1 container chỉ là 1 tiến trình nên sẽ có pid , kiểm tra pid của container 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/7f4483ec-dfb0-417c-a15a-1db74b17606c/Untitled.png)
+![alt text](image-3.png)  
 
 1. /proc : Chứa các thông tin về tài nguyên tiến trình , tài nguyên hệ thống , các thiết bị được kết nối với nhau 
 
 Điều quan tâm là nó chứa thông tin về tiến trình :
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/8d5d5ebd-1f02-4ea2-9d14-06af6cf42fea/Untitled.png)
-
+![alt text](image-4.png)  
+ 
 Có 1 folder tương ứng với PID  của container 
 
 Vào root tạo thử 1 file flag.txt 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/033447cb-bac8-423d-8059-1958c023604e/Untitled.png)
+![alt text](image-5.png)  
 
 Sang bên container kiểm tra 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/644da67c-5dd0-4cb2-b326-d77353e97ab5/Untitled.png)
+![alt text](image-6.png)  
 
 Điều này có ích gì trong security ? 
 
@@ -57,7 +57,7 @@ Nếu ai có quyền truy cập vào host mà ( chỉ với xem được process
 
 Không có OS riêng , chia sẻ cùng kernel ,làm sao để các container này không chọc vào lẫn nhau ?
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/a7af0285-21ee-4a80-bfc5-cc85d0793a33/Untitled.png)
+![alt text](image-7.png)  
 
 ### Namespaces
 
@@ -84,15 +84,17 @@ Kiểm tra container có những namespace nào
 lsns -p  PID
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/3d7e8ed3-774e-48b2-8202-de942107670f/Untitled.png)
+![alt text](image-8.png)  
 
 **mount namespace**  : cung cấp cho container cái nhìn cô lập về hệ thống file , 
 
 ở trên khi truy cập vào container , chúng ta có thể thấy root nhưng cái root đó không phải ở host 
 
+```js
 /proc/[pid]/mountinfo chứa đường dẫn mount point 
+```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/e1529dfc-81e5-4b43-8b06-dfc15528ff16/Untitled.png)
+![alt text](image-9.png)  
 
 như trên thì root của container được mount với đường dẫn /var/lib/docker 
 
@@ -129,9 +131,9 @@ là các đơn vị đặc quyền có thể được enable hoặc disable.
 
   
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/9bac8929-c10d-421b-8667-23d54b518040/Untitled.png)
+![alt text](image-10.png)  
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/0ec28f32-427e-46c1-a9ca-b96d32bcaf25/Untitled.png)
+![alt text](image-11.png)  
 
 Vậy những task cần root mới làm được thì chỉ có thể gán quyền root  ? 
 
@@ -145,7 +147,7 @@ Kiểm tra các quyền được gán cho container trên “
 pscap -p PID 
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/9ab67fcd-04a8-4618-85db-ca6830caf8d8/Untitled.png)
+![alt text](image-12.png)  
 
 Các quyền mặc định của 1 container  : 
 
@@ -153,7 +155,7 @@ chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap, net_bind_ser
 
 Vấn đề là một số quyền cụ thể có thể call system , 1 container có quyền call system , chọc vào kernel ? 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c9489041-6d03-4ab9-9843-6c7e73044e5f/771cc68e-dcaf-47f1-bed6-df05f37727d2/Untitled.png)
+![alt text](image-13.png)  
 
 Một số quyền quan trọng  : 
 
